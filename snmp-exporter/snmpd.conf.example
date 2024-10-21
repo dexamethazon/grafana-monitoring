@@ -1,0 +1,21 @@
+sysLocation MyLocation
+sysContact  devops <devops@mydomain.id>
+sysDescr    MyServer
+
+agentAddress  udp:127.0.0.1:161
+
+#           security name   source mask     community id
+com2sec     readonly        10.10.10.0/24   myserver
+
+#       group name      security model      security name
+group   mygroup         v2c                 readonly
+
+#            incl/excl   subtree
+view    all  included    .1
+
+# Access control directives
+#       group name      context     model   level   match       read     write       notify
+access  mygroup         ""          any     noauth  exact       all      none        none
+
+#Extend
+extend distro /usr/bin/distro
